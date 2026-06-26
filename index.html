@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Landry Therapy Group | Find the Right Starting Point</title>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<img
+src="images/landry-logo.png"
+alt="Landry Therapy Group"
+class="logo"
+>
+
+<h1>Let's Find the Right Starting Point</h1>
+
+<p>
+Whether you're looking for therapy, a Mental Health Checkup, a psychological evaluation, or simply aren't sure where to begin, we're here to help.
+</p>
+
+<form id="matchForm">
+
+<div class="top-form-layout">
+
+<div class="top-form-fields">
+
+<h3>What type of service are you looking for?</h3>
+
+<select id="servicePath">
+<option value="">Select One</option>
+<option value="therapy">Therapy</option>
+<option value="mhc">Mental Health Checkup</option>
+<option value="evaluation">Psychological Evaluation</option>
+<option value="notSure">Not Sure</option>
+</select>
+
+<div id="clientTypeSection">
+
+<h3>Who is seeking services today?</h3>
+
+<select id="clientType">
+<option value="">Select One</option>
+<option value="children">Child</option>
+<option value="teens">Teen</option>
+<option value="adults">Adult</option>
+<option value="couples">Couple</option>
+<option value="families">Family</option>
+</select>
+
+</div>
+
+</div>
+
+<div class="side-image-wrapper">
+
+<img
+src="images/circle-on-the-grass.jpg"
+alt="Diverse group of people gathered together"
+class="side-image"
+>
+
+</div>
+
+</div>
+
+<div id="concernSection">
+
+<h3>What would you like help with today?</h3>
+
+<div id="concernContainer"></div>
+
+</div>
+
+<div id="insuranceSection">
+
+<h3>Your Insurance</h3>
+
+<select id="insurance">
+<option value="">Select One</option>
+<option value="aetna">Aetna</option>
+<option value="bcbstx">BCBSTX</option>
+<option value="uhc">UHC/UMR/Optum</option>
+<option value="privatePay">Private Pay</option>
+<option value="notSure">Not Sure</option>
+</select>
+
+</div>
+
+<div id="meetingSection">
+
+<h3>Your Meeting Preference</h3>
+
+<select id="meetingPreference">
+<option value="">Select One</option>
+<option value="inPerson">In Person</option>
+<option value="online">Online</option>
+<option value="either">Either</option>
+</select>
+
+</div>
+
+<div id="availabilitySection">
+
+<h3>Your Availability</h3>
+
+<select id="availability">
+<option value="">Select One</option>
+<option value="weekdayDaytime">Weekday Daytime</option>
+<option value="weekdayEvening">Weekday Evening</option>
+<option value="weekend">Weekend</option>
+<option value="flexible">Flexible</option>
+</select>
+
+</div>
+
+<br><br>
+
+<button id="matchButton" type="submit">
+See My Recommendations
+</button>
+
+</form>
+
+<div id="results"></div>
+
+<div class="footer-help">
+
+<p>
+Still comparing options?
+</p>
+
+<p class="footer-disclaimer">
+Your responses are not saved or shared. This tool simply helps you explore your options.
+</p>
+
+<a
+href="mailto:Tiffany@landrytherapygroup.com"
+class="footer-button"
+>
+Email Tiffany
+</a>
+
+</div>
+</div>
+
+<script src="providerData.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
