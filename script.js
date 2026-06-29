@@ -1,3 +1,4 @@
+const REQUEST_FORM_URL = "https://script.google.com/macros/s/AKfycbwyc-Hp6CrQs6dJN1Rz5s7flQvAugWR942oR6p7KwLZnANgxjv360rPXBD55gfEMfsCbA/exec";
 const approvedTags = [
   "ADHD",
   "Anxiety",
@@ -381,19 +382,27 @@ function displayResults(matches, servicePath){
             </div>
             <div class="actions">
 
-              <a href="${match.provider.fullBioUrl}" target="_blank">
-                View Full Bio
-              </a>
+  <a href="${match.provider.fullBioUrl}" target="_blank">
+    View Full Bio
+  </a>
 
-              <a href="${match.provider.appointmentFormUrl}" target="_blank">
-                Request Appointment
-              </a>
+  <button
+  type="button"
+  class="request-button"
+  onclick="openRequestModal('${match.provider.providerName}', 'Appointment')"
+  >
+    Request Appointment
+  </button>
 
-              <a href="${match.provider.appointmentFormUrl}?request=consultation&provider=${encodeURIComponent(match.provider.providerName)}" target="_blank">
-                Free Consultation
-              </a>
+  <button
+  type="button"
+  class="request-button secondary-request"
+  onclick="openRequestModal('${match.provider.providerName}', 'Consultation')"
+  >
+    Free Consultation
+  </button>
 
-            </div>
+</div>
 
           </div>
 
@@ -550,4 +559,246 @@ function displayNotSureResult(){
   `;
 
   results.innerHTML += getStandardTiffanyCard();
+}
+
+function getSelectedConcernsText(){
+  return Array.from(
+    document.querySelectorAll('#concernContainer input:checked')
+  ).map(cb => cb.value).join(", ");
+}
+
+function getServiceLabel(value){
+  const labels = {
+    therapy: "Therapy",
+    mhc: "Mental Health Checkup",
+    evaluation: "Psychological Evaluation",
+    notSure: "Not Sure"
+  };
+
+  return labels[value] || value;
+}
+
+function getClientTypeLabel(value){
+  const labels = {
+    children: "Child",
+    teens: "Teen",
+    adults: "Adult",
+    couples: "Couple",
+    families: "Family"
+  };
+
+  return labels[value] || value;
+}
+
+function openRequestModal(providerName, requestType){
+  const servicePath = document.getElementById("servicePath").value;
+  const clientType = document.getElementById("clientType").value;
+  const insurance = document.getElementById("insurance").value;
+  const meetingPreference = document.getElementById("meetingPreference").value;
+  const availability = document.getElementById("availability").value;
+
+  const scheduleWord = requestType === "Appointment" ? "appointment" : "consultation";
+
+  document.body.insertAdjacentHTML("beforeend", `
+    <div class="request-modal-overlay" id="requestModal">
+
+      <div class="request-modal">
+
+        <button class="modal-close" onclick="closeRequestModal()">×</button>
+
+        <img
+          src="images/ltg-icon.png"
+          alt="Landry Therapy Group"
+          class="concierge-logo"
+        >
+
+        <h2>Review & Submit Your Request</h2>
+
+        <hr class="concierge-divider">
+
+        <p>
+  We've gathered the information below based on your selections. Please review it for accuracy before submitting your request.
+</p>
+<h3>Here's What We Received</h3>
+        <div class="request-summary">
+          <p>✓ <strong>Your Selected Clinician:</strong> ${providerName}</p>
+<p>✓ <strong>Service Requested:</strong> ${getServiceLabel(servicePath)}</p>
+<p>✓ <strong>Who is Seeking Services:</strong> ${getClientTypeLabel(clientType)}</p>
+<p>✓ <strong>Areas You'd Like Help With:</strong> ${getSelectedConcernsText()}</p>
+<p>✓ <strong>Your Insurance:</strong> ${insuranceLabels[insurance]}</p>
+<p>✓ <strong>Your Meeting Preference:</strong> ${meetingLabels[meetingPreference]}</p>
+<p>✓ <strong>Your Availability:</strong> ${availabilityLabels[availability]}</p>
+        </div>
+
+        <label class="request-label">
+  First Name
+</label>
+
+<input
+  type="text"
+  id="clientFirstName"
+  class="request-input"
+  placeholder="First Name"
+>
+
+<label class="request-label">
+  Last Name
+</label>
+
+<input
+  type="text"
+  id="clientLastName"
+  class="request-input"
+  placeholder="Last Name"
+>
+
+<label class="request-label">
+  Email
+</label>
+
+<input
+  type="email"
+  id="clientEmail"
+  class="request-input"
+  placeholder="you@example.com"
+>
+
+        <label class="request-label">
+          Anything you'd like your therapist to know before we contact you? 
+        </label>
+
+        <textarea
+          id="clientMessage"
+          class="request-textarea"
+          rows="4"
+           placeholder="Optional"
+        ></textarea>
+
+        <div class="request-actions">
+
+          <button
+            type="button"
+            class="update-button"
+            onclick="updateMyChoices()"
+          >
+            ← Update My Choices
+          </button>
+
+          <button
+            type="button"
+            class="submit-request-button"
+            onclick="submitRequestTest('${requestType}')"
+          >
+            Submit Request
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  `);
+}
+
+function closeRequestModal(){
+  const modal = document.getElementById("requestModal");
+  if(modal){
+    modal.remove();
+  }
+}
+
+function updateMyChoices(){
+  closeRequestModal();
+  document.getElementById("matchForm").scrollIntoView({ behavior: "smooth" });
+}
+
+function submitRequestTest(requestType){
+const firstName = document.getElementById("clientFirstName").value.trim();
+const lastName = document.getElementById("clientLastName").value.trim();
+const email = document.getElementById("clientEmail").value.trim();
+  const message = document.getElementById("clientMessage").value.trim();
+
+  if(!firstName){
+    alert("Please enter your first name.");
+    return;
+}
+
+if(!lastName){
+    alert("Please enter your last name.");
+    return;
+}
+
+if(!email){
+    alert("Please enter your email address.");
+    return;
+}
+
+  const submitButton = document.querySelector(".submit-request-button");
+  submitButton.textContent = "Sending...";
+  submitButton.disabled = true;
+
+  const servicePath = document.getElementById("servicePath").value;
+  const clientType = document.getElementById("clientType").value;
+  const insurance = document.getElementById("insurance").value;
+  const meetingPreference = document.getElementById("meetingPreference").value;
+  const availability = document.getElementById("availability").value;
+
+  const payload = {
+    requestType: requestType,
+    providerName: document.querySelector(".request-summary p").innerText.replace("✓ Your Selected Clinician:", "").trim(),
+    servicePath: getServiceLabel(servicePath),
+    clientType: getClientTypeLabel(clientType),
+    concerns: getSelectedConcernsText(),
+    insurance: insuranceLabels[insurance],
+    meetingPreference: meetingLabels[meetingPreference],
+    availability: availabilityLabels[availability],
+    clientFirstName: firstName,
+    clientLastName: lastName,
+    clientEmail: email,
+    message: message
+  };
+
+  fetch(REQUEST_FORM_URL, {
+    method: "POST",
+    mode: "no-cors",
+    body: JSON.stringify(payload)
+  })
+  .then(() => {
+    showRequestSuccess(requestType);
+  })
+  .catch(() => {
+    alert("Something went wrong. Please try again.");
+    submitButton.textContent = "Submit Request";
+    submitButton.disabled = false;
+  });
+}
+
+function showRequestSuccess(requestType){
+  const scheduleWord = requestType === "Appointment" ? "appointment" : "consultation";
+
+  const modal = document.querySelector(".request-modal");
+
+  modal.innerHTML = `
+    <img
+      src="images/ltg-icon.png"
+      alt="Landry Therapy Group"
+      class="concierge-logo"
+    >
+
+    <div class="success-check">✓</div>
+
+    <h2>Thank You!</h2>
+
+    <p class="success-message">
+      Your ${scheduleWord} request has been received.
+    </p>
+
+    <p class="success-message">
+      We'll contact you shortly to help you get started.
+    </p>
+  `;
+
+  setTimeout(() => {
+    closeRequestModal();
+  }, 3500);
 }
