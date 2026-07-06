@@ -1,4 +1,9 @@
 const REQUEST_FORM_URL = "https://script.google.com/macros/s/AKfycbwyc-Hp6CrQs6dJN1Rz5s7flQvAugWR942oR6p7KwLZnANgxjv360rPXBD55gfEMfsCbA/exec";
+
+const urlParams = new URLSearchParams(window.location.search);
+
+const marketingSource = urlParams.get("source") || "Direct / Unknown";
+
 const approvedTags = [
   "ADHD",
   "Anxiety",
@@ -755,7 +760,8 @@ if(!email){
     clientFirstName: firstName,
     clientLastName: lastName,
     clientEmail: email,
-    message: message
+    message: message,
+    marketingSource: marketingSource  
   };
 
   fetch(REQUEST_FORM_URL, {
