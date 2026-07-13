@@ -41,6 +41,7 @@ const approvedTags = [
 const insuranceLabels = {
   aetna: "Aetna",
   bcbstx: "BCBSTX",
+  curative: "Curative",
   uhc: "UHC/UMR/Optum",
   privatePay: "Private Pay",
   notSure: "Not Sure"
@@ -192,6 +193,8 @@ document.getElementById("matchForm").addEventListener("submit", function(e) {
     if (!provider.acceptingNewClients) return;
     if (!provider[clientType]) return;
     if (meetingPreference !== "either" && !provider[meetingPreference]) return;
+    if (availability !== "flexible" && !provider[availability]) return;
+    if (insurance !== "notSure" && !provider[insurance]) return;
 
     let score = 0;
     const matchReasons = [];
