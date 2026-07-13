@@ -17,6 +17,7 @@ const providers = [
     "families": false,
     "aetna": true,
     "bcbstx": true,
+    "curative": true,
     "uhc": true,
     "privatePay": true,
     "concerns": [
@@ -62,6 +63,7 @@ const providers = [
     "families": false,
     "aetna": true,
     "bcbstx": true,
+    "curative": true,
     "uhc": true,
     "privatePay": true,
     "concerns": [
@@ -103,6 +105,7 @@ const providers = [
     "families": true,
     "aetna": true,
     "bcbstx": true,
+    "curative": true,
     "uhc": true,
     "privatePay": true,
     "concerns": [
@@ -144,6 +147,7 @@ const providers = [
     "families": true,
     "aetna": true,
     "bcbstx": true,
+    "curative": true,
     "uhc": true,
     "privatePay": true,
     "concerns": [
@@ -182,6 +186,7 @@ const providers = [
     "families": false,
     "aetna": true,
     "bcbstx": true,
+    "curative": true,
     "uhc": true,
     "privatePay": true,
     "concerns": [
@@ -226,6 +231,7 @@ const providers = [
     "families": false,
     "aetna": false,
     "bcbstx": false,
+    "curative": false,
     "uhc": false,
     "privatePay": true,
     "concerns": [
@@ -263,6 +269,7 @@ const providers = [
     "families": false,
     "aetna": true,
     "bcbstx": true,
+    "curative": true,
     "uhc": true,
     "privatePay": true,
     "concerns": [
@@ -306,6 +313,7 @@ const providers = [
     "families": false,
     "aetna": true,
     "bcbstx": true,
+    "curative": true,
     "uhc": true,
     "privatePay": true,
     "concerns": [
@@ -352,6 +360,7 @@ const providers = [
     "families": true,
     "aetna": true,
     "bcbstx": true,
+    "curative": true,
     "uhc": true,
     "privatePay": true,
     "concerns": [
@@ -393,6 +402,7 @@ const providers = [
     "families": true,
     "aetna": true,
     "bcbstx": true,
+    "curative": true,
     "uhc": true,
     "privatePay": true,
     "concerns": [
