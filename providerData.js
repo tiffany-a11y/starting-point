@@ -176,9 +176,9 @@ const providers = [
     "inPerson": false,
     "online": true,
     "weekdayDaytime": true,
-    "weekdayEvening": false,
+    "weekdayEvening": true,
     "weekend": false,
-    "flexible": false,
+    "flexible": true,
     "children": false,
     "teens": false,
     "adults": true,
@@ -203,9 +203,10 @@ const providers = [
       "Burnout"
     ],
     "treatments": [
-      "Gottman Method",
+      "EFT",
       "CBT",
       "DBT",
+      "Somatic Experiencing",
       "Talk"
     ],
     "consultationAvailable": true,
