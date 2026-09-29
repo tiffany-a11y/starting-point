@@ -35,7 +35,8 @@ const approvedTags = [
   "Substance Abuse",
   "Suicidal Ideation",
   "Trauma",
-  "Women's Issues"
+  "Women's Issues",
+  "Psychological Evaluations"
 ];
 
 const insuranceLabels = {
