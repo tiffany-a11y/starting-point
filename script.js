@@ -200,14 +200,7 @@ document.getElementById("matchForm").addEventListener("submit", function(e) {
     let score = 0;
     const matchReasons = [];
 
-    if (
-      clientType === "couples" &&
-      (meetingPreference === "online" || meetingPreference === "either") &&
-      provider.providerName === "Christie Greeley"
-    ) {
-      score += 100;
-      matchReasons.push("Recommended for virtual couples counseling");
-    }
+    
 
     if (
   clientType === "adults" &&
@@ -225,13 +218,7 @@ if (
   score += 90;
 }
 
-if (
-  clientType === "adults" &&
-  ["Depression", "Anxiety", "LGBTQ+"].some(concern => selectedConcerns.includes(concern)) &&
-  provider.providerName === "Christie Greeley"
-) {
-  score += 70;
-}
+
     selectedConcerns.forEach(concern => {
       if (provider.concerns.includes(concern)) {
         score += 10;
